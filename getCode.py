@@ -7,6 +7,7 @@ import urllib
 import json
 import base64
 import dama2_user
+import time
 
 
 ###ID = '51622'
@@ -137,7 +138,10 @@ def codes(path,type):
     return s[:-1]
 
 if __name__ =='__main__':
+    t1=time.time()
     print(codes('code.png',287))
+    t2=time.time()
+    print(t2-t1)
 
 
 
