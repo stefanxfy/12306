@@ -6,6 +6,7 @@ import urllib.request
 import urllib
 import json
 import base64
+import dama2_user
 
 
 ###ID = '51622'
@@ -115,7 +116,7 @@ class DamatuApi():
 
 # 调用类型实例：
 # 1.实例化类型 参数是打码兔用户账号和密码
-dmt = DamatuApi("stefandama2", "dama2")
+dmt = DamatuApi(dama2_user.username, dama2_user.password)
 # 2.调用方法：
 print(dmt.getBalance())  # 查询余额
 #print(dmt.decode('0349.bmp', 200))  # 上传打码
