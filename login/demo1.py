@@ -5,6 +5,7 @@ import time
 sys.path.append('D:\Apython2017.10.28\12306')
 import getCode
 import user
+import json
 #获取验证码url   https://kyfw.12306.cn/passport/captcha/captcha-image
 #验证url post   https://kyfw.12306.cn/passport/captcha/captcha-check
 #data
@@ -39,7 +40,12 @@ def checkcode(img):
         'rand':'sjrand'
     }
     r2=session.post("https://kyfw.12306.cn/passport/captcha/captcha-check",data=data)
-    print(r2.text)
+    result = json.loads (r2.text)
+    if result['result_code']=="4":
+        print("验证码验证成功，正在登录...")
+    else:
+        print("验证失败，正在重新认证...")
+        checkcode(img)
 
 
 
@@ -51,7 +57,12 @@ def login (username,password):
         'appid': 'otn'
     }
     r3=session.post("https://kyfw.12306.cn/passport/web/login",data=data)
-    print(r3.text)
+    result=json.loads(r3.text)
+    if result['result_code']==0:
+        print("登录成功")
+    else:
+        login()
+    #print(r3.text)
 
 
 
@@ -60,7 +71,7 @@ if __name__ =='__main__':
     t1 = time.time()
     login(user.username,user.password)
     t2=time.time()
-    print(t2-t1)
+    print("登录用时%d秒"%(t2-t1))
 
 
 
