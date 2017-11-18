@@ -1,2 +1,2 @@
-username="stefandama2"
-password="dama2"
+username=""
+password=""
